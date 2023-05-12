@@ -19,6 +19,7 @@ function toggleModal() {
 }
 
 function toggleModalAuth() {
+  loginInput.style.borderColor = "";
   modalAuth.classList.toggle("is-open");
 }
 
@@ -46,16 +47,19 @@ function notAuthoruzed() {
 
   function logIn(event) {
     event.preventDefault();
-    login = loginInput.value;
 
-    localStorage.setItem("gloDelivery", login);
-
-    toggleModalAuth();
-    buttonAuth.removeEventListener("click", toggleModalAuth);
-    closeAuth.removeEventListener("click", toggleModalAuth);
-    logInForm.removeEventListener("submit", logIn);
-    logInForm.reset();
-    checkAuth();
+    if (loginInput.value) {
+      login = loginInput.value;
+      localStorage.setItem("gloDelivery", login);
+      toggleModalAuth();
+      buttonAuth.removeEventListener("click", toggleModalAuth);
+      closeAuth.removeEventListener("click", toggleModalAuth);
+      logInForm.removeEventListener("submit", logIn);
+      logInForm.reset();
+      checkAuth();
+    } else {
+      loginInput.style.borderColor = "red";
+    }
   }
 
   buttonAuth.addEventListener("click", toggleModalAuth);
